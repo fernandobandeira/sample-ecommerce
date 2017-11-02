@@ -4,8 +4,49 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "start": "ts-node --inspect=5858 src/server.ts",
+    "dev": "./node_modules/nodemon/bin/nodemon.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ]
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongodb": "^2.2.33",
+    "mongoose": "^4.12.6",
+    "mongoose-delete": "^0.4.0",
+    "mongoose-slug-generator": "^1.0.4",
+    "morgan": "^1.9.0",
+    "q": "^1.5.1"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.16.7",
+    "@types/jest": "^21.1.5",
+    "@types/mongodb": "^2.2.15",
+    "@types/mongoose": "^4.7.24",
+    "@types/morgan": "^1.7.35",
+    "@types/node": "^8.0.47",
+    "@types/supertest": "^2.0.3",
+    "jest": "^21.2.1",
+    "nodemon": "^1.12.1",
+    "supertest": "^3.0.0",
+    "ts-jest": "^21.1.4",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.6.1"
+  }
 }
