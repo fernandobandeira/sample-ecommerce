@@ -7,8 +7,8 @@
     "build": "tsc",
     "start": "ts-node --inspect=5858 src/server.ts",
     "dev": "./node_modules/nodemon/bin/nodemon.js",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "node --inspect=5858 ./node_modules/.bin/jest",
+    "test:watch": "node --inspect=5858 ./node_modules/.bin/jest --watch"
   },
   "jest": {
     "transform": {

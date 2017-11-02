@@ -26,9 +26,19 @@ beforeEach(() => Product.remove({}).then(() => Product.create(seed)))
 
 describe('GET /', () => {
     test('It should list all products', () => {
-        return request(app).get("/").then(response => {
+        return request(app).get('/').then(response => {
             expect(response.status).toBe(200)
-            expect(response.body.products).toMatchObject(seed);
+            expect(response.body.products).toMatchObject(seed)
         })
     });
+})
+
+describe('GET /:id', () => {
+    test('It should return a single product', () => {
+        const [product] = seed
+        return request(app).get(`/${product._id}`).then(response => {
+            expect(response.status).toBe(200)
+            expect(response.body.product).toMatchObject(product)
+        })
+    })
 })

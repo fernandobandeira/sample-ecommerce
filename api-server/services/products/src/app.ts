@@ -23,8 +23,8 @@ export class App {
     const connection = mongoose.createConnection(MONGODB_URI)
     this.Product = connection.model('Product', ProductSchema)
   
-    this.app = express();
-    this.app.use(bodyParser.json());
-    this.app.use(logger('dev'));
+    this.app = express()
+    this.app.use(bodyParser.json())
+    this.app.use(logger('dev'))
   }
 }
