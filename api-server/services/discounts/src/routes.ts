@@ -7,17 +7,17 @@ export default (
 ) => {
   app.get('/', (req, res) => {
     model.find()
-      .then(categories => res.send({ categories }));
+      .then(discounts => res.send({ discounts }));
   });
 
   app.get('/:id', (req, res) => {
     model.findById(req.params.id)
-      .then((category) => {
-        if (!category) {
+      .then((discount) => {
+        if (!discount) {
           return res.status(404).send({});
         }
 
-        res.send({ category });
+        res.send({ discount });
       })
       .catch(e => res.status(400).send({}));
   });
@@ -27,46 +27,50 @@ export default (
       '_id',
       'name',
       'active',
-      'description',
+      'start',
+      'end',
+      'percentage',
     ]))
       .save()
-      .then(category => res.send({ category }))
+      .then(discount => res.send({ discount }))
       .catch(e => res.status(400).send({}));
   });
 
   app.patch('/:id', (req, res) => {
     model.findById(req.params.id)
-      .then((category) => {
-        if (!category) {
+      .then((discount) => {
+        if (!discount) {
           return res.status(404).send({});
         }
 
         const { __v } = req.body;
-        if (__v && __v !== category.__v) {
-          return res.status(409).send({ category });
+        if (__v && __v !== discount.__v) {
+          return res.status(409).send({ discount });
         }
 
-        category.set(pick(req.body, [
+        discount.set(pick(req.body, [
           'name',
           'active',
-          'description',
+          'start',
+          'end',
+          'percentage',
         ]));
 
-        category.save()
-          .then(category => res.send({ category }));             
+        discount.save()
+          .then(discount => res.send({ discount }));             
       })
       .catch(e => res.status(400).send({}));
   });
 
   app.delete('/:id', (req, res) => {
     model.findById(req.params.id)
-      .then((category) => {
-        if (!category) {
+      .then((discount) => {
+        if (!discount) {
           return res.status(404).send({});
         }
 
-        category.delete()
-          .then(category => res.send({ category }));        
+        discount.delete()
+          .then(discount => res.send({ discount }));        
       })
       .catch(e => res.status(400).send({}));
   });
