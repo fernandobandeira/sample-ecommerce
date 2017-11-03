@@ -9,4 +9,4 @@ const { app } = new App({ MONGODB_URI })
 
 app.listen(PORT, () => {
   console.log(`Started server on port ${PORT}`)
-});
+})

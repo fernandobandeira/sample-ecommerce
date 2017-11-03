@@ -36,9 +36,112 @@ describe('GET /', () => {
 describe('GET /:id', () => {
     test('It should return a single product', () => {
         const [product] = seed
+
         return request(app).get(`/${product._id}`).then(response => {
             expect(response.status).toBe(200)
             expect(response.body.product).toMatchObject(product)
+        })
+    })
+
+    test('It should return a 404', () => {
+        return request(app).get(`/${new ObjectId().toHexString()}`).then(response => {
+            expect(response.status).toBe(404)
+        })
+    })
+
+    test('It should return a 400', () => {
+        return request(app).get(`/123456`).then(response => {
+            expect(response.status).toBe(400)
+        })
+    })
+})
+
+describe('POST /', () => {
+    test('It should create a product', () => {
+        const product = {
+            _id: new ObjectId().toHexString(),
+            name: 'test post',
+            active: true,
+            price: 52.40,
+            description: 'testing it'
+        }
+
+        return request(app).post('/').send(product).then(response => {
+            expect(response.status).toBe(200)
+            expect(response.body.product).toMatchObject(product)
+        })
+    })
+
+    test('It should not create a product when missing required data', () => {
+        const product = {
+            active: true,
+            price: 52.40,
+            description: 'testing it'
+        }
+
+        return request(app).post('/').send(product).then(response => {
+            expect(response.status).toBe(400)
+        })
+    })
+})
+
+describe('PATCH /:id', () => {
+    test('It should update the product', () => {
+        const product = {
+            ...seed[0],
+            name: 'test update'
+        }
+
+        return request(app).patch(`/${product._id}`).send(product).then(response => {
+            expect(response.status).toBe(200)
+            expect(response.body.product).toMatchObject(product)
+        })
+    })
+
+    test('It should return a 409 when patching an outdated product', () => {
+        const product = {
+            ...seed[0],
+            __v: -2
+        }
+
+        return request(app).patch(`/${product._id}`).send(product).then(response => {
+            expect(response.status).toBe(409)
+        })
+    })
+
+    test('It should return a 404', () => {
+        return request(app).patch(`/${new ObjectId().toHexString()}`).then(response => {
+            expect(response.status).toBe(404)
+        })
+    })
+
+    test('It should return a 400', () => {
+        return request(app).patch(`/123456`).then(response => {
+            expect(response.status).toBe(400)
+        })
+    })
+})
+
+describe('DELETE /:id', () => {
+    test('It should delete the product', () => {
+        const [product] = seed
+
+        return request(app).delete(`/${product._id}`).then(response => {
+            expect(response.status).toBe(200)
+            expect(response.body.product).toMatchObject(product)
+            expect(response.body.product.deleted).toBe(true)
+        })
+    })
+
+    test('It should return a 404', () => {
+        return request(app).delete(`/${new ObjectId().toHexString()}`).then(response => {
+            expect(response.status).toBe(404)
+        })
+    })
+
+    test('It should return a 400', () => {
+        return request(app).delete(`/123456`).then(response => {
+            expect(response.status).toBe(400)
         })
     })
 })

@@ -8,6 +8,7 @@
     "start": "ts-node --inspect=5858 src/server.ts",
     "dev": "./node_modules/nodemon/bin/nodemon.js",
     "test": "node --inspect=5858 ./node_modules/.bin/jest",
+    "test:coverage": "node --inspect=5858 ./node_modules/.bin/jest --coverage",
     "test:watch": "node --inspect=5858 ./node_modules/.bin/jest --watch"
   },
   "jest": {
@@ -27,6 +28,7 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "lodash": "^4.17.4",
     "mongodb": "^2.2.33",
     "mongoose": "^4.12.6",
     "mongoose-delete": "^0.4.0",
