@@ -1,13 +1,13 @@
-FROM risingstack/alpine:3.4-v6.9.4-4.2.0
+FROM node:8.9.0
 
 ENV PORT 3001
+ENV MONGODB_URI mongodb://192.168.99.100:27017/Ecommerce
 
 EXPOSE 3001
 
-COPY package.json package.json
+COPY . .
 RUN npm install
 
-COPY . .
 RUN npm run build
 
 CMD ["node", "build/server.js"]
