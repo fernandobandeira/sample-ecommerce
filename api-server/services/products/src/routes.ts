@@ -1,6 +1,10 @@
 import { pick } from 'lodash';
+import * as express from 'express';
+import { Model } from 'mongoose';
 
-export default ({ app, model }) => {
+export default (
+  { app, model } : { app: express.Application, model: Model<any> },
+) => {
   app.get('/', (req, res) => {
     model.find()
       .then(products => res.send({ products }));
@@ -13,13 +17,13 @@ export default ({ app, model }) => {
           return res.status(404).send({});
         }
 
-        return res.send({ product });
+        res.send({ product });
       })
       .catch(e => res.status(400).send({}));
   });
 
   app.post('/', (req, res) => {
-    return new model(pick(req.body, [
+    new model(pick(req.body, [
       '_id',
       'name',
       'active',
@@ -50,8 +54,8 @@ export default ({ app, model }) => {
           'description',
         ]));
 
-        return product.save()
-          .then(product => res.send({ product }))  ;             
+        product.save()
+          .then(product => res.send({ product }));             
       })
       .catch(e => res.status(400).send({}));
   });
@@ -63,8 +67,8 @@ export default ({ app, model }) => {
           return res.status(404).send({});
         }
 
-        return product.delete()
-          .then(product => res.send({ product }))  ;        
+        product.delete()
+          .then(product => res.send({ product }));        
       })
       .catch(e => res.status(400).send({}));
   });

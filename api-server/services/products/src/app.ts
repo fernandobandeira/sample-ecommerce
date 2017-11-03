@@ -8,7 +8,7 @@ import routes from './routes';
 
 export class App {
   public app: express.Application;
-  public model;
+  public model: mongoose.Model<any>;
 
   constructor(config) {
     this.config(config);
@@ -16,7 +16,9 @@ export class App {
     routes(this);
   }
 
-  private config({ MONGODB_URI }) {
+  private config(
+    { MONGODB_URI } : { MONGODB_URI: string },
+) {
     global.Promise = q.Promise;
     mongoose.Promise = global.Promise;
 
