@@ -42,8 +42,8 @@ export default (
           return res.status(404).send({});
         }
 
-        const { __v } = req.body;
-        if (__v && __v !== product.__v) {
+        const { _version } = req.body;
+        if (_version && _version !== product._version) {
           return res.status(409).send({ product });
         }
 

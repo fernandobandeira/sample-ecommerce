@@ -99,7 +99,7 @@ describe('PATCH /:id', () => {
   test('It should return a 409 when patching an outdated category', () => {
     const category = {
       ...seed[0],
-      __v: -2,
+      _version: -2,
     };
 
     return request(app).patch(`/${category._id}`).send(category).then((response) => {

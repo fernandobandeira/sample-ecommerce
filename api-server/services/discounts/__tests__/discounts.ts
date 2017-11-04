@@ -99,7 +99,7 @@ describe('PATCH /:id', () => {
   test('It should return a 409 when patching an outdated discount', () => {
     const discount = {
       ...seed[0],
-      __v: -2,
+      _version: -2,
     };
 
     return request(app).patch(`/${discount._id}`).send(discount).then((response) => {

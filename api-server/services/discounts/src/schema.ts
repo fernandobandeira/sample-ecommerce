@@ -27,7 +27,7 @@ const schema = new mongoose.Schema(
       min: 0,
     },
   },
-  { timestamps: true });
+  { timestamps: true, versionKey: '_version' });
 
 schema.plugin(softdelete, { deletedAt: true });
 

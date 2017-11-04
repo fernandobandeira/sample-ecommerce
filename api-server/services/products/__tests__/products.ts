@@ -103,7 +103,7 @@ describe('PATCH /:id', () => {
   test('It should return a 409 when patching an outdated product', () => {
     const product = {
       ...seed[0],
-      __v: -2,
+      _version: -2,
     };
 
     return request(app).patch(`/${product._id}`).send(product).then((response) => {

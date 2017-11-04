@@ -1,0 +1,49 @@
+{
+  "name": "products",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node --inspect=5858 src/server.ts",
+    "dev": "./node_modules/nodemon/bin/nodemon.js",
+    "test": "node --inspect=5858 ./node_modules/.bin/jest",
+    "test:coverage": "node --inspect=5858 ./node_modules/.bin/jest --coverage",
+    "test:watch": "node --inspect=5858 ./node_modules/.bin/jest --watch"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.17.0",
+    "express": "^4.16.2",
+    "express-graphql": "^0.6.11",
+    "graphql": "^0.11.7",
+    "morgan": "^1.9.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^21.1.5",
+    "@types/morgan": "^1.7.35",
+    "@types/node": "^8.0.47",
+    "@types/supertest": "^2.0.3",
+    "jest": "^21.2.1",
+    "nodemon": "^1.12.1",
+    "supertest": "^3.0.0",
+    "ts-jest": "^21.1.4",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.8.0",
+    "tslint-config-airbnb": "^5.3.0",
+    "typescript": "^2.6.1"
+  }
+}
