@@ -2,7 +2,6 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
 import schema from './schema';
-// import controller from './controllers/controller';
 
 export class App {
   public app: express.Application;

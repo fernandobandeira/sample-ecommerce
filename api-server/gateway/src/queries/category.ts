@@ -5,8 +5,11 @@ export default (baseURL) => {
     categories: () =>
       axios.get(`${baseURL}/`)
         .then(response => response.data.categories),
-    category: ({ id }) =>
+    category: (root, { id }) =>
       axios.get(`${baseURL}/${id}`)
         .then(response => response.data.category),
+    discountCategories: (root, { id }) =>
+      axios.get(`${baseURL}/discount/${id}/categories`)
+        .then(response => response.data.categories),
   };
 };

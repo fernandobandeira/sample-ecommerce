@@ -1,24 +1,24 @@
 export const types = `
-  type Category {
+  type Discount {
     _id: ID!
     _version: Int
     name: String!
     active: Boolean!
     deleted: Boolean!
-    description: String
-    slug: String!
+    start: String!
+    end: String
+    percentage: Int!
     updatedAt: String!
     createdAt: String!
     deletedAt: String
     products: [Product]
-    discounts: [Discount]
+    categories: [Category]
   }
 `;
 
 export const queries = `
-  categories: [Category]
-  category(id: ID!): Category
-  discountCategories(id: ID!): [Category]
+  discounts: [Discount]
+  discount(id: ID!): Discount
 `;
 
 export const mutations = `

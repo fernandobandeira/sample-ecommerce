@@ -28,6 +28,7 @@ export default (
       'name',
       'active',
       'description',
+      'discounts',
     ]))
       .save()
       .then(category => res.send({ category }))
@@ -50,6 +51,7 @@ export default (
           'name',
           'active',
           'description',
+          'discounts',
         ]));
 
         category.save()
@@ -69,5 +71,13 @@ export default (
           .then(category => res.send({ category }));        
       })
       .catch(e => res.status(400).send({}));
+  });
+
+  // Relationship routes
+  app.get('/discount/:id/categories', (req, res) => {
+    const { id } = req.params;
+
+    model.find({ discounts: id })
+      .then(categories => res.send({ categories }));
   });
 };

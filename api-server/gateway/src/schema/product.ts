@@ -12,12 +12,15 @@ export const types = `
     createdAt: String!
     deletedAt: String
     categories: [Category]
+    discounts: [Discount]
   }
 `;
 
 export const queries = `
   products: [Product]
   product(id: ID!): Product
+  categoryProducts(id: ID!): [Product]
+  discountProducts(id: ID!): [Product]
 `;
 
 export const mutations = `

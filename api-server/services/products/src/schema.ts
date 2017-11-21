@@ -28,6 +28,7 @@ const schema = new mongoose.Schema(
       unique: true,
     },
     categories: [String],
+    discounts: [String],
   },
   { timestamps: true, versionKey: '_version' });
 

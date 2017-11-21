@@ -30,6 +30,7 @@ export default (
       'price',
       'description',
       'categories',
+      'discounts',
     ]))
       .save()
       .then(product => res.send({ product }))
@@ -54,6 +55,7 @@ export default (
           'price',
           'description',
           'categories',
+          'discounts',
         ]));
 
         product.save()
@@ -73,5 +75,20 @@ export default (
           .then(product => res.send({ product }));        
       })
       .catch(e => res.status(400).send({}));
+  });
+
+  // Relashionship routes
+  app.get('/category/:id/products', (req, res) => {
+    const { id } = req.params;
+
+    model.find({ categories: id })
+      .then(products => res.send({ products }));
+  });
+
+  app.get('/discount/:id/products', (req, res) => {
+    const { id } = req.params;
+
+    model.find({ discounts: id })
+      .then(products => res.send({ products }));
   });
 };

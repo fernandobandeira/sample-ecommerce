@@ -5,8 +5,14 @@ export default (baseURL) => {
     products: () =>
       axios.get(`${baseURL}/`)
         .then(response => response.data.products),
-    product: ({ id }) =>
+    product: (root, { id }) =>
       axios.get(`${baseURL}/${id}`)
         .then(response => response.data.product),
+    categoryProducts: (root, { id }) =>
+      axios.get(`${baseURL}/category/${id}/products`)
+        .then(response => response.data.products),
+    discountProducts: (root, { id }) =>
+      axios.get(`${baseURL}/discount/${id}/products`)
+        .then(response => response.data.products),
   };
 };
