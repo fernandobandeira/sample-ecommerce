@@ -27,6 +27,7 @@ const schema = new mongoose.Schema(
       slug: 'name',
       unique: true,
     },
+    categories: [String],
   },
   { timestamps: true, versionKey: '_version' });
 

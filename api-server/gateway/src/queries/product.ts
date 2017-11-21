@@ -1,14 +1,12 @@
 import axios from 'axios';
 
 export default (baseURL) => {
-  axios.defaults.baseURL = baseURL;
-
   return {
-    listProducts: () =>
-      axios.get('/')
+    products: () =>
+      axios.get(`${baseURL}/`)
         .then(response => response.data.products),
-    getProduct: ({ id }) =>
-      axios.get(`/${id}`)
+    product: ({ id }) =>
+      axios.get(`${baseURL}/${id}`)
         .then(response => response.data.product),
   };
 };

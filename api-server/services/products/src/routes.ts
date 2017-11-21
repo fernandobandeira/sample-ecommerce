@@ -29,6 +29,7 @@ export default (
       'active',
       'price',
       'description',
+      'categories',
     ]))
       .save()
       .then(product => res.send({ product }))
@@ -52,6 +53,7 @@ export default (
           'active',
           'price',
           'description',
+          'categories',
         ]));
 
         product.save()

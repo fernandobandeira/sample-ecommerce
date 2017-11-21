@@ -11,12 +11,13 @@ export const types = `
     updatedAt: String!
     createdAt: String!
     deletedAt: String
+    categories: [Category]
   }
 `;
 
 export const queries = `
-  listProducts: [Product]
-  getProduct(id: ID!): Product
+  products: [Product]
+  product(id: ID!): Product
 `;
 
 export const mutations = `
