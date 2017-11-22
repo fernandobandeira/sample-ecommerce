@@ -13,6 +13,7 @@ export const types = `
     deletedAt: String
     categories: [Category]
     discounts: [Discount]
+    validDiscounts: [Discount]
   }
 `;
 

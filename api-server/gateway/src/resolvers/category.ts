@@ -1,12 +1,16 @@
 import axios from 'axios';
+import { omit } from 'lodash';
 
-export default ({ Query }) => {
+export default function ({ Query }) {
+  this.products = ({ _id }) =>
+    Query.categoryProducts(undefined, { id: _id });
+    
+  this.discounts = ({ discounts }) =>
+    Promise.all(discounts.map(id => Query.discount(undefined, { id })));
+
   return {
     Category: {
-      products: ({ _id }) =>
-        Query.categoryProducts(undefined, { id: _id }),
-      discounts: ({ discounts }) =>
-        Promise.all(discounts.map(id => Query.discount(undefined, { id }))),
+      ...omit(this, 'default'),
     },
   };
-};
+}
