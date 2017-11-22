@@ -15,6 +15,17 @@ export const types = `
     discounts: [Discount]
     validDiscounts: [Discount]
   }
+
+  input ProductInput {
+    _id: ID
+    _version: Int
+    name: String!
+    active: Boolean
+    price: Float
+    description: String
+    categories: [ID]
+    discounts: [ID]
+  }
 `;
 
 export const queries = `
@@ -25,4 +36,7 @@ export const queries = `
 `;
 
 export const mutations = `
+  createProduct(product: ProductInput!): Product
+  updateProduct(id: ID!, product: ProductInput!): Product
+  deleteProduct(id: ID!): Product
 `;

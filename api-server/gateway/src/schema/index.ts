@@ -16,19 +16,26 @@ schemas.forEach((s) => {
   mutations.push(s.mutations);
 });
 
-const rootQuery = `
+const query = `
   type Query {
     ${queries.join('\n')}
   }
 `;
 
-const schemaDefinition = `
+const mutation = `
+  type Mutation {
+    ${mutations.join('\n')}
+  }
+`;
+
+const schema = `
   schema {
-    query: Query
+    query: Query,
+    mutation: Mutation
   }
 `;
 
 export default makeExecutableSchema({
   resolvers,
-  typeDefs: [schemaDefinition, rootQuery, types.join('\n')],  
+  typeDefs: [schema, query, mutation, types.join('\n')],  
 });
