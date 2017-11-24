@@ -13,6 +13,15 @@ export const types = `
     products: [Product]
     discounts: [Discount]
   }
+
+  input CategoryInput {
+    _id: ID
+    _version: Int
+    name: String!
+    active: Boolean
+    description: String
+    discounts: [ID]
+  }
 `;
 
 export const queries = `
@@ -22,4 +31,7 @@ export const queries = `
 `;
 
 export const mutations = `
+  createCategory(category: CategoryInput!): Category
+  updateCategory(id: ID!, category: CategoryInput!): Category
+  deleteCategory(id: ID!): Category
 `;

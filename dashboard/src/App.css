@@ -1,0 +1,23 @@
+#admin .trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 16px;
+  cursor: pointer;
+  transition: color .3s;
+}
+
+#admin .trigger:hover {
+  color: #108ee9;
+}
+
+body {
+  background-color: rgb(236, 236, 236);
+}
+
+.loading {
+  font-size: 70px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

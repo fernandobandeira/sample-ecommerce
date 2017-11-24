@@ -14,6 +14,16 @@ export const types = `
     products: [Product]
     categories: [Category]
   }
+
+  input DiscountInput {
+    _id: ID
+    _version: Int
+    name: String!
+    active: Boolean
+    percentage: Int!
+    start: String
+    end: String
+  }
 `;
 
 export const queries = `
@@ -22,4 +32,7 @@ export const queries = `
 `;
 
 export const mutations = `
+  createDiscount(discount: DiscountInput!): Discount
+  updateDiscount(id: ID!, discount: DiscountInput!): Discount
+  deleteDiscount(id: ID!): Discount
 `;

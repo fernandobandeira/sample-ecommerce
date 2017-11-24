@@ -26,7 +26,7 @@ export default function ({ Query }) {
         const now = new Date;
 
         result = result.filter((discount) => {
-          if (!discount || !discount.active) {
+          if (!discount || !discount.active || discount.deleted) {
             return false;
           }
 
