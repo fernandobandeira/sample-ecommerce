@@ -7,6 +7,8 @@ import ProductsPage from './pages/products/ProductsPage';
 import ProductsFormPage from './pages/products/ProductsFormPage';
 import CategoriesPage from './pages/categories/CategoriesPage';
 import CategoriesFormPage from './pages/categories/CategoriesFormPage';
+import DiscountsPage from './pages/discounts/DiscountsPage';
+import DiscountsFormPage from './pages/discounts/DiscountsFormPage';
 
 import './App.css';
 const { Header, Sider, Content } = Layout;
@@ -86,6 +88,9 @@ class App extends Component {
               <Route exact path="/categories" component={CategoriesPage} />
               <Route exact path="/categories/new" component={CategoriesFormPage} />
               <Route exact path="/categories/:id" component={CategoriesFormPage} />
+              <Route exact path="/discounts" component={DiscountsPage} />
+              <Route exact path="/discounts/new" component={DiscountsFormPage} />
+              <Route exact path="/discounts/:id" component={DiscountsFormPage} />
             </Switch>
           </Content>
         </Layout>
