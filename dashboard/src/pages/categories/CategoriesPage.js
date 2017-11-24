@@ -3,9 +3,9 @@ import { Table, Button, Popconfirm, Icon } from 'antd';
 import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
 import { graphql, compose } from 'react-apollo';
-import { qProducts } from '../../queries/products';
+import { qCategories } from '../../queries/categories'
 
-class ProductsPage extends Component {
+class CategoriesPage extends Component {
   columns = [{
     title: 'Name',
     dataIndex: 'name',
@@ -23,19 +23,15 @@ class ProductsPage extends Component {
     dataIndex: 'slug',
     key: 'slug',
   }, {
-    title: 'Price',
-    dataIndex: 'price',
-    key: 'price',
-  }, {
     title: 'Action',
     key: 'action',
     render: (text, record) => (
       <span>
-        <Link to={`/products/${record._id}`}><Button type="primary">Edit</Button></Link>
+        <Link to={`/categories/${record._id}`}><Button type="primary">Edit</Button></Link>
         <span className="ant-divider" />
         <Popconfirm
           placement="topRight"
-          title="Are you sure delete this product?"
+          title="Are you sure delete this category?"
           onConfirm={() => this.onDelete(record._id)}
           okText="Yes"
           cancelText="No"
@@ -47,24 +43,24 @@ class ProductsPage extends Component {
   }]
 
   onDelete = (id) => {
-    this.props.deleteProduct(id);
+    this.props.deleteCategory(id);
   }
 
   render() {
     const { loading } = this.props.data;
-    let { products = [] } = this.props.data;
-    products = products.filter((p) => !p.deleted);
+    let { categories = [] } = this.props.data;
+    categories = categories.filter((p) => !p.deleted);
 
     return (
       <div>
-        <Link to="/products/new" style={{ float: 'right' }}>
+        <Link to="/categories/new" style={{ float: 'right' }}>
           <Button type="primary" shape="circle" icon="plus" />
         </Link>
         {loading && (
           <Icon type="loading" className="loading" />
         )}
         {!loading && (
-          <Table dataSource={products} columns={this.columns} rowKey="_id" style={{ clear: 'both', paddingTop: '24px' }} />
+          <Table dataSource={categories} columns={this.columns} rowKey="_id" style={{ clear: 'both', paddingTop: '24px' }} />
         )}
       </div>
     );
@@ -72,8 +68,8 @@ class ProductsPage extends Component {
 }
 
 const mutation = gql`
-  mutation deleteProduct($id: ID!) {
-    deleteProduct(id: $id) {
+  mutation deleteCategory($id: ID!) {
+    deleteCategory(id: $id) {
       _id
       deleted
     }
@@ -81,10 +77,10 @@ const mutation = gql`
 `;
 
 export default compose(
-  graphql(qProducts),
+  graphql(qCategories),
   graphql(mutation, {
     props: ({ mutate }) => ({
-      deleteProduct: (id) => mutate({ variables: { id } })
+      deleteCategory: (id) => mutate({ variables: { id } })
     })
   })
-)(ProductsPage);
+)(CategoriesPage);

@@ -5,6 +5,8 @@ import { Route, withRouter, Switch } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/products/ProductsPage';
 import ProductsFormPage from './pages/products/ProductsFormPage';
+import CategoriesPage from './pages/categories/CategoriesPage';
+import CategoriesFormPage from './pages/categories/CategoriesFormPage';
 
 import './App.css';
 const { Header, Sider, Content } = Layout;
@@ -81,6 +83,9 @@ class App extends Component {
               <Route exact path="/products" component={ProductsPage} />
               <Route exact path="/products/new" component={ProductsFormPage} />
               <Route exact path="/products/:id" component={ProductsFormPage} />
+              <Route exact path="/categories" component={CategoriesPage} />
+              <Route exact path="/categories/new" component={CategoriesFormPage} />
+              <Route exact path="/categories/:id" component={CategoriesFormPage} />
             </Switch>
           </Content>
         </Layout>

@@ -1,16 +1,35 @@
 import gql from 'graphql-tag';
 
+export const fCategory= gql`
+  fragment categoryFragment on Category {
+    _id
+    active
+    name
+    slug
+    description
+    discounts {
+      _id
+    }
+    deleted
+  }
+`;
+
 export const qCategories = gql`
   query {
     categories {
-      _id
-      active
-      name
-      description
-      discounts {
-        _id
-      }
-      deleted
+      ...categoryFragment
     }
   }
+
+  ${fCategory}
+`;
+
+export const qCategory = gql`
+  query category($id: ID!) {
+    category(id: $id) {
+      ...categoryFragment
+    }
+  }
+
+  ${fCategory}
 `;
