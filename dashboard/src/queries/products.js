@@ -5,14 +5,11 @@ export const fProduct = gql`
     _id
     active
     name
+    slug
     price
     description
-    categories {
-      _id
-    }
-    discounts {
-      _id
-    }
+    categories
+    discounts
     deleted
   }
 `;

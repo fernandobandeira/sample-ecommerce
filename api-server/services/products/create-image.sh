@@ -6,8 +6,8 @@ docker rm -f products-service
 
 docker rmi products-service
 
-docker image prune
+docker image prune -f
 
-docker volume prune
+docker volume prune -f
 
 docker build -t products-service .

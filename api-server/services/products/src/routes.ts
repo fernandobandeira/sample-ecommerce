@@ -78,17 +78,31 @@ export default (
   });
 
   // Relashionship routes
-  app.get('/category/:id/products', (req, res) => {
+  app.get('/category/:id', (req, res) => {
     const { id } = req.params;
 
-    model.find({ categories: id })
+    model.find({ deleted: false, categories: id })
       .then(products => res.send({ products }));
   });
 
-  app.get('/discount/:id/products', (req, res) => {
+  app.get('/discount/:id', (req, res) => {
     const { id } = req.params;
 
-    model.find({ discounts: id })
+    model.find({ deleted: false, discounts: id })
       .then(products => res.send({ products }));
+  });
+
+  app.patch('/discount/:id', (req, res) => {
+    const { id } = req.params;
+    const { products } = req.body;
+
+    model.update({ discounts: id }, { $pull: { discounts: id } }, { multi: true })
+      .exec(() => 
+        model.update({ _id: products }, { $push: { discounts: id } }, { multi: true })
+          .exec(() => 
+            model.find({ _id: products })
+              .then(products => res.send({ products })),
+          ),
+      );
   });
 };

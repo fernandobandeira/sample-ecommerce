@@ -6,12 +6,17 @@ import {
   Switch,
   Icon,
 } from 'antd';
+import { getDifferences } from '../../utils';
 
 class CategoriesForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
+        if (this.props.category) {
+          return this.props.handleSubmit(getDifferences(this.props.category, values));
+        }
+
         this.props.handleSubmit(values);
       }
     });

@@ -11,7 +11,9 @@ class CategoriesFormPage extends Component {
   }
 
   updateCategory = (values) => {
-    this.props.updateCategory(this.props.match.params.id, values);
+    if (Object.keys(values).length !== 0) {
+      this.props.updateCategory(this.props.match.params.id, values);
+    }
     this.props.history.push('/categories');
   }
 

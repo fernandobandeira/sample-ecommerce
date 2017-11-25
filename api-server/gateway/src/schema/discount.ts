@@ -11,18 +11,22 @@ export const types = `
     updatedAt: String!
     createdAt: String!
     deletedAt: String
-    products: [Product]
-    categories: [Category]
+    products: [ID]
+    categories: [ID]
+    getProducts: [Product]
+    getCategories: [Category]
   }
 
   input DiscountInput {
     _id: ID
     _version: Int
-    name: String!
+    name: String
     active: Boolean
-    percentage: Int!
-    start: String
-    end: String
+    percentage: Int
+    start: String!
+    end: String!
+    products: [ID]
+    categories: [ID]
   }
 `;
 

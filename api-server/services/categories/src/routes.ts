@@ -74,10 +74,24 @@ export default (
   });
 
   // Relationship routes
-  app.get('/discount/:id/categories', (req, res) => {
+  app.get('/discount/:id', (req, res) => {
     const { id } = req.params;
 
-    model.find({ discounts: id })
+    model.find({ deleted: false, discounts: id })
       .then(categories => res.send({ categories }));
+  });
+
+  app.patch('/discount/:id', (req, res) => {
+    const { id } = req.params;
+    const { categories } = req.body;
+
+    model.update({ discounts: id }, { $pull: { discounts: id } }, { multi: true })
+      .exec(() => 
+        model.update({ _id: categories }, { $push: { discounts: id } }, { multi: true })
+          .exec(() => 
+            model.find({ _id: categories })
+              .then(categories => res.send({ categories })),
+          ),
+      );
   });
 };

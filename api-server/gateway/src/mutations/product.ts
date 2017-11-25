@@ -11,5 +11,8 @@ export default (baseURL) => {
     deleteProduct: (root, { id }) =>
       axios.delete(`${baseURL}/${id}`)
         .then(response => response.data.product),
+    updateDiscountProducts: (root, { id, products }) =>
+      axios.patch(`${baseURL}/discount/${id}`, { products })
+        .then(response => response.data.products),
   };
 };

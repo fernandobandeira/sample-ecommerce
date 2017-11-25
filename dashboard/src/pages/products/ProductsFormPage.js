@@ -12,7 +12,9 @@ class ProductsFormPage extends Component {
   }
 
   updateProduct = (values) => {
-    this.props.updateProduct(this.props.match.params.id, values);
+    if (Object.keys(values).length !== 0) {
+      this.props.updateProduct(this.props.match.params.id, values);
+    }
     this.props.history.push('/products');
   }
 
@@ -62,6 +64,7 @@ const optimisticFields = (product) => ({
   name: product.name,
   active: product.active || false,
   price: product.price || 0,
+  slug: product.slug || '',
   description: product.description || null,
   categories: product.categories ? product.categories.map(c => ({ _id: c, __typename: 'Category' })) : [],
   discounts: [],

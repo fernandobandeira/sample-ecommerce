@@ -15,14 +15,15 @@ const schema = new mongoose.Schema(
     },
     start: {
       type: Date,
-      default: Date.now(),
+      required: true,
     },
     end: {
       type: Date,
+      required: true,
     },
     percentage: {
       type: Number,
-      required: true,
+      default: 0,
       max: 100,
       min: 0,
     },

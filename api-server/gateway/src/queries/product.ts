@@ -9,10 +9,10 @@ export default (baseURL) => {
       axios.get(`${baseURL}/${id}`)
         .then(response => response.data.product),
     categoryProducts: (root, { id }) =>
-      axios.get(`${baseURL}/category/${id}/products`)
+      axios.get(`${baseURL}/category/${id}`)
         .then(response => response.data.products),
     discountProducts: (root, { id }) =>
-      axios.get(`${baseURL}/discount/${id}/products`)
+      axios.get(`${baseURL}/discount/${id}`)
         .then(response => response.data.products),
   };
 };

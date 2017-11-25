@@ -9,6 +9,8 @@ export const fDiscount= gql`
     end
     percentage
     deleted
+    categories
+    products
   }
 `;
 
@@ -30,4 +32,42 @@ export const qDiscount = gql`
   }
 
   ${fDiscount}
+`;
+
+export const mCreateDiscount = gql`
+  mutation createDiscount($discount: DiscountInput!) {
+    createDiscount(discount: $discount) {
+      ...discountFragment
+    }
+  }
+
+  ${fDiscount}
+`;
+
+export const mUpdateDiscount = gql`
+  mutation updateDiscount($id: ID!, $discount: DiscountInput!) {
+    updateDiscount(id: $id, discount: $discount) {
+      ...discountFragment
+    }
+  }
+
+  ${fDiscount}
+`;
+
+export const mUpdateDiscountCategories = gql`
+  mutation updateDiscountCategories($id: ID!, $categories: [ID]!) {
+    updateDiscountCategories(id: $id, categories: $categories) {
+      _id
+      discounts
+    }
+  }
+`;
+
+export const mUpdateDiscountProducts = gql`
+  mutation updateDiscountProducts($id: ID!, $products: [ID]!) {
+    updateDiscountProducts(id: $id, products: $products) {
+      _id
+      discounts
+    }
+  }
 `;

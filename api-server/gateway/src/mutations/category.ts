@@ -11,5 +11,8 @@ export default (baseURL) => {
     deleteCategory: (root, { id }) =>
       axios.delete(`${baseURL}/${id}`)
         .then(response => response.data.category),
+    updateDiscountCategories: (root, { id, categories }) =>
+      axios.patch(`${baseURL}/discount/${id}`, { categories })
+        .then(response => response.data.categories),
   };
 };

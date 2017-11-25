@@ -7,9 +7,7 @@ export const fCategory= gql`
     name
     slug
     description
-    discounts {
-      _id
-    }
+    discounts
     deleted
   }
 `;

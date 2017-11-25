@@ -5,12 +5,20 @@ import {
   InputNumber,
   Button,
   Switch,
+  Select,
   Icon,
   DatePicker,
+  Transfer,
 } from 'antd';
+import { getDifferences } from '../../utils';
 import moment from 'moment';
 
 class DiscountsForm extends Component {
+  state = {
+    targetKeys: [],
+    initialized: false,
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
@@ -18,15 +26,29 @@ class DiscountsForm extends Component {
         let discount = values;
         discount.start = discount.period[0];
         discount.end = discount.period[1];
-        discount.period = undefined;
+        discount.period = undefined;        
+
+        if (this.props.discount) {
+          return this.props.handleSubmit(getDifferences(this.props.discount, discount));
+        }
 
         this.props.handleSubmit(discount);
       }
     });
   }
 
+  handleTransferChange = (targetKeys) => {
+    this.setState({ targetKeys });
+  }
+
+  componentWillReceiveProps(props) {
+    if (props.discount && !this.state.initialized) {
+      this.setState({ targetKeys: props.discount.products, initialized: true });
+    }
+  }
+
   render() {    
-    const { loading, discount = {} } = this.props;
+    const { loading, discount = {}, categories = [], products = [] } = this.props;
     const { getFieldDecorator } = this.props.form;
 
     const formItemLayout = {
@@ -99,6 +121,39 @@ class DiscountsForm extends Component {
                 initialValue: discount.percentage,
               })(<InputNumber min={0} max={100} />)}
               <span className="ant-form-text">%</span>
+            </Form.Item>
+            <Form.Item
+              {...formItemLayout}
+              label="Categories"
+            >
+              {getFieldDecorator('categories', {
+                initialValue: discount.categories,
+              })(
+                <Select
+                  mode="multiple"
+                  style={{ width: '100%' }}
+                  placeholder="Please select"
+                >
+                  {categories.map(category => (
+                    <Select.Option key={category._id}>{category.name}</Select.Option>
+                  ))}
+                </Select>
+              )}
+            </Form.Item>
+            <Form.Item
+              {...formItemLayout}
+              label="Products"
+            >
+              {getFieldDecorator('products', {
+                initialValue: discount.products,
+              })(
+                <Transfer
+                  dataSource={products}
+                  targetKeys={this.state.targetKeys}
+                  onChange={this.handleTransferChange}
+                  render={product => product.name}
+                />
+              )}
             </Form.Item>
             <Form.Item {...tailFormItemLayout}>
               <Button type="primary" htmlType="submit">Save</Button>

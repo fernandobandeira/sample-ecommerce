@@ -8,12 +8,17 @@ import {
   Icon,
   Select,
 } from 'antd';
+import { getDifferences } from '../../utils';
 
 class ProductsForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
+        if (this.props.product) {
+          return this.props.handleSubmit(getDifferences(this.props.product, values));
+        }
+
         this.props.handleSubmit(values);
       }
     });
@@ -93,10 +98,7 @@ class ProductsForm extends Component {
               label="Categories"
             >
               {getFieldDecorator('categories', {
-                initialValue: product.categories !== undefined ? product.categories.reduce((previous, category) => {
-                  previous.push(category._id);
-                  return previous;
-                }, []) : undefined,
+                initialValue: product.categories,
               })(
                 <Select
                   mode="multiple"
