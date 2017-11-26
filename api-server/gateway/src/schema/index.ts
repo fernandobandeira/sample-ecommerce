@@ -3,12 +3,13 @@ import resolvers from '../resolvers';
 import * as product from './product';
 import * as category from './category';
 import * as discount from './discount';
+import * as user from './user';
 
 const types = [];
 const queries = [];
 const mutations = [];
 
-const schemas = [product, category, discount];
+const schemas = [product, category, discount, user];
 
 schemas.forEach((s) => {
   types.push(s.types);

@@ -5,6 +5,7 @@ eval `docker-machine env manager1`
 array=('./products'
   './categories'
   './discounts'
+  './users'
 )
 
 # we go to the root of the project
