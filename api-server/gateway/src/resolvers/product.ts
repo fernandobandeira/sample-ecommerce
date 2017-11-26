@@ -4,6 +4,22 @@ import category from './category';
 import * as Promise from 'q';
 
 export default function ({ Query }) {
+  this.dPrice = product =>
+    this.validDiscounts(product)
+      .then((discounts) => {
+        if (!discounts) {
+          return product.price;
+        }
+
+        let dPrice = product.price;
+
+        discounts.forEach((discount) => {      
+          dPrice = dPrice * (1 - discount.percentage / 100);
+        });
+
+        return dPrice;
+      });
+
   this.getCategories = ({ categories }) =>
     Promise.all(categories.map(id => Query.category(undefined, { id })));
   

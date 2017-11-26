@@ -6,6 +6,7 @@ array=('./products'
   './categories'
   './discounts'
   './users'
+  './orders'
 )
 
 # we go to the root of the project

@@ -6,6 +6,7 @@ export const types = `
     active: Boolean!
     deleted: Boolean!
     price: Float!
+    dPrice: Float!
     description: String
     slug: String!
     updatedAt: String!
