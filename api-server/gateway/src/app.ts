@@ -11,7 +11,12 @@ export class App {
     this.app = express();
 
     this.app.use(cors());
-    this.app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
+    this.app.use('/graphql', bodyParser.json(), graphqlExpress(request => ({ 
+      schema,
+      context: {
+        authorization: request.headers.authorization,
+      },
+    })));
     this.app.use('/graphiql', graphiqlExpress({
       endpointURL: '/graphql',
     }));
