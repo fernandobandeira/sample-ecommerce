@@ -4,9 +4,25 @@ import List, {
   ListItemText,
 } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
+import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
 import Button from 'material-ui/Button';
+import { omit } from 'lodash';
 
 class CheckoutPage extends Component {
+  generateOrder = () => {
+    const { cart, login, createOrder, clearCart } = this.props;
+
+    const products = Object.keys(cart).map((key) => omit(cart[key], '__typename'));
+
+    createOrder({
+      products,
+      user: omit(login, ['iat', 'exp']),
+    }).then(() => {
+      clearCart();
+    });
+  }
+
   render() {
     const { cart } = this.props;
 
@@ -21,7 +37,7 @@ class CheckoutPage extends Component {
             </ListItem>
           ))}
         </List>
-        <Button raised>
+        <Button raised onClick={() => this.generateOrder()}>
           Order items
         </Button>
       </Paper>
@@ -29,4 +45,18 @@ class CheckoutPage extends Component {
   }
 }
 
-export default CheckoutPage;
+const createOrder = gql`
+  mutation createOrder($order: OrderInput!) {
+    createOrder(order: $order) {
+      _id
+    }
+  }
+`;
+
+export default graphql(createOrder, {
+  props: ({ mutate }) => ({
+    createOrder: (order) => mutate({
+      variables: { order },
+    })
+  })
+})(CheckoutPage);

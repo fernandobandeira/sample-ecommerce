@@ -4,12 +4,13 @@ import * as product from './product';
 import * as category from './category';
 import * as discount from './discount';
 import * as user from './user';
+import * as order from './order';
 
 const types = [];
 const queries = [];
 const mutations = [];
 
-const schemas = [product, category, discount, user];
+const schemas = [product, category, discount, user, order];
 
 schemas.forEach((s) => {
   types.push(s.types);

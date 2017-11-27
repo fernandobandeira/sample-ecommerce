@@ -94,6 +94,13 @@ class App extends Component {
     });
   }
 
+  clearCart = () => {
+    this.setState({
+      cart: {},
+    });
+    this.props.history.push('/');
+  }
+
   render() {
     const { loginMenu, cart, login } = this.state;    
 
@@ -177,7 +184,7 @@ class App extends Component {
             <Route render={(props) => (
               <LoggedIn {...props} isLoggedIn={this.state.login}>
                 <Route exact path="/checkout" render={props => (
-                  <CheckoutPage {...props} cart={cart} />
+                  <CheckoutPage {...props} cart={cart} login={login} clearCart={this.clearCart} />
                 )} />
               </LoggedIn>
             )} />

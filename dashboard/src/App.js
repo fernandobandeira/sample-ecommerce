@@ -13,6 +13,8 @@ import CategoriesPage from './pages/categories/CategoriesPage';
 import CategoriesFormPage from './pages/categories/CategoriesFormPage';
 import DiscountsPage from './pages/discounts/DiscountsPage';
 import DiscountsFormPage from './pages/discounts/DiscountsFormPage';
+import LeadsPage from './pages/leads/LeadsPage';
+import OrdersPage from './pages/orders/OrdersPage';
 
 import './App.css';
 
@@ -118,10 +120,14 @@ class App extends Component {
                 <Icon type="usergroup-add" />
                 <span>Leads</span>
               </Menu.Item>
+              <Menu.Item key="orders">
+                <Icon type="shopping-cart" />
+                <span>Orders</span>
+              </Menu.Item>
               <Menu.Item key="logout">
                 <Icon type="logout" />
                 <span>Logout</span>
-              </Menu.Item>            
+              </Menu.Item>
             </Menu>
           )}
         </Sider>
@@ -146,6 +152,8 @@ class App extends Component {
                 <Route exact path="/discounts" component={DiscountsPage} />
                 <Route exact path="/discounts/new" component={DiscountsFormPage} />
                 <Route exact path="/discounts/:id" component={DiscountsFormPage} />
+                <Route exact path="/leads" component={LeadsPage} />
+                <Route exact path="/orders" component={OrdersPage} />
               </Switch>
             ) : (
               <div>
